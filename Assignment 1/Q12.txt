@@ -1,0 +1,92 @@
+import java.util.*;
+
+class Student{
+        String Name;
+        int roll;
+        ArrayList<String> Subjects;
+
+        Student(String n1,int r,String s1,String s2,String s3,String s4,String s5){
+                Name=n1;
+                roll=r;
+                Subjects=new ArrayList<String>();
+                Subjects.add(s1);
+                Subjects.add(s2);
+                Subjects.add(s3);
+                Subjects.add(s4);
+                Subjects.add(s5);
+        }
+
+        void Change_subject(String old,String s1){
+                for(int i=0;i<Subjects.size();i++){
+                        if(Subjects.get(i).equals(old)){
+                                Subjects.set(i,s1);
+                                break;
+                        }
+                }
+        }
+
+
+}
+
+
+class TabulationSheet{
+        String subject;
+        HashMap<Integer,Integer> sheet=new HashMap<>();
+
+        void add_marks(int roll,int marks){
+                sheet.put(roll,marks);
+        }
+
+        void display(){
+                System.out.println("Marks of "+subject+"are:"+sheet);
+        }
+
+        TabulationSheet(String s){
+                subject=s;
+        }
+}
+
+class MarkSheet{
+        HashMap<Integer,ArrayList<Integer>> marks=new HashMap<>();
+
+        void add_marks(int roll,ArrayList<Integer> h){
+                marks.put(roll,h);
+        }
+
+        void display(){
+                System.out.println("Marksheet");
+                System.out.println(marks);
+                System.out.println("***********************");
+        }
+
+}
+
+class Main{
+        public static void main(String[] args){
+                Student s1=new Student("Bob",12,"Maths","Science","Pol Sc","History","Geography");
+                Student s2=new Student("Aaron",13,"English","History","Physics","Chemistry","Biology");
+                TabulationSheet t1=new TabulationSheet("History");
+                t1.add_marks(12,98);
+ t1.add_marks(13,94);
+                t1.display();
+                MarkSheet m1=new MarkSheet();
+
+                ArrayList<Integer> marks12=new ArrayList<>();
+                marks12.add(81);
+                marks12.add(89);
+                marks12.add(90);
+                marks12.add(98);
+                marks12.add(78);
+
+                ArrayList<Integer> marks13=new ArrayList<>();
+                marks13.add(80);
+                marks13.add(89);
+                marks13.add(90);
+                marks13.add(94);
+                marks13.add(78);
+
+                m1.add_marks(12,marks12);
+                m1.add_marks(13,marks13);
+                m1.display();
+        }
+}

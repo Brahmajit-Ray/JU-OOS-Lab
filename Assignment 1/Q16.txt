@@ -1,0 +1,28 @@
+interface Fruit{
+    void hasaPeel();
+}
+
+interface Vegetable{
+    void hasaRoot();
+}
+
+class Tomato implements Fruit,Vegetable{
+    @Override
+    public void hasaPeel(){
+        System.out.println("Has A Peel");
+    }
+    
+    @Override
+    public void hasaRoot(){
+        System.out.println("Has A Root");
+    }
+}
+
+
+class Main{
+    public static void main(String[] args){
+        Tomato t=new Tomato();
+        t.hasaPeel();
+        t.hasaRoot();
+    }
+}

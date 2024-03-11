@@ -1,0 +1,154 @@
+import java.util.Scanner;
+
+class Date{
+    int day;
+    int month;
+    int year;
+
+    Date(){
+        day=1;
+        month=1;
+        year=1970;
+    }
+
+    Date(int s){
+        day=s;
+        month=1;
+        year=1970;
+    }
+
+    Date(int d,int m){
+        day=d;
+        month=m;
+        year=1970;
+    }
+
+    Date(int d,int m,int y){
+        day=d;
+        month=m;
+        year=y;
+    }
+
+    void display(){
+        System.out.println(day+"/"+month+"/"+year) ;
+    }
+
+    boolean leap_year(int y){
+        boolean leap=false;
+        if(y%4!=0){
+            return leap;
+        }else{
+            if(y%100==0){
+                    if(y%400==0){
+                            leap=true;
+                    }else{
+                            return leap;
+                    }
+            }
+
+            leap=true;
+            return leap;
+        }
+    }
+
+    void next_date(){
+        int limit=0;
+        int next_date=0;
+        int next_month=0;
+        int next_year=0;
+
+
+
+        if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12){
+            limit=31;
+        }else if(month==2){
+            if(leap_year(year)){
+                limit=29;
+            }else{
+                limit=28;
+            }
+        }else{
+            limit=30;
+        }
+            
+        if(day==limit){
+            next_date=1;
+        }else{
+            next_date=day+1;
+        }
+
+
+        if(day==limit){
+            if(month==12){
+                    next_month=1;
+                    next_year=year+1;
+            }else{
+                    next_month=month+1;
+                    next_year=year;
+            }
+        }else{
+            next_month=month;
+            next_year=year;
+        }
+
+        System.out.println(next_date+"/"+next_month+"/"+next_year) ;
+    }
+    
+    
+    void prev_date(){
+        int limit=0;
+        int prev_date=0;
+        int prev_month=0;
+        int prev_year=0;
+
+
+
+        if(month==1 || month==2 || month==4 || month==6 || month==8 || month==9 || month==11){
+            limit=31;
+        }else if(month==3){
+            if(leap_year(year)){
+                limit=29;
+            }else{
+                limit=28;
+            }
+        }else{
+            limit=30;
+        }
+            
+        if(day==1){
+            prev_date=limit;
+        }else{
+            prev_date=day-1;
+        }
+
+
+        if(day==1){
+            if(month==1){
+                    prev_month=12;
+                    prev_year=year-1;
+            }else{
+                    prev_month=month-1;
+                    prev_year=year;
+            }
+        }else{
+            prev_month=month;
+            prev_year=year;
+        }
+
+        System.out.println(prev_date+"/"+prev_month+"/"+prev_year) ;
+    }
+
+}
+
+
+
+
+
+class Main{
+    public static void main(String[] args){
+        Date d1=new Date(1,1,2021) ;
+        d1.display() ;
+        d1.next_date() ;
+        d1.prev_date();
+    }
+}

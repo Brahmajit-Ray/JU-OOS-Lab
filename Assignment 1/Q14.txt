@@ -1,0 +1,93 @@
+interface Shape{
+    void area();
+    void draw();
+    void rotate();
+    void move();
+}
+
+class Circle implements Shape{
+    int radius;
+    int centre_x;
+    int centre_y;
+    int gyro;
+    
+    Circle(int r,int x,int y){
+        radius=r;
+        centre_x=x;
+        centre_y=y;
+        gyro=0;
+    }
+    
+    @Override
+    void area(){
+        ar=3.14*r*r;
+        System.out.println("Area:"+ar);
+    }
+    
+    @Override
+    void draw(){
+        System.out.println("Drawing Circle");
+    }
+    
+    @Override
+    void rotate(int x){
+        System.out.println("Rotated by:"+x);
+    }
+    
+    @Override
+    void move(int x,int y){
+        centre_x+=x;
+        centre_y+=y;
+    }
+    
+    void get_details(){
+        
+        area();
+        System.out.println("Centre:"+centre_x+","+centre_y);
+        System.out.println("Rotate Angle:"+gyro);
+    }
+}
+
+class Rectangle implements Shape{
+    int length;
+    int width;
+    int centre_x;
+    int centre_y;
+    int gyro;
+    
+    Rectangle(int l,int w,int x,int y){
+        length=l;
+        width=w;
+        centre_x=x;
+        centre_y=y;
+        gyro=0;
+    }
+    
+    @Override
+    void area(){
+        ar=length*width
+        System.out.println("Area:"+ar);
+    }
+    
+    @Override
+    void draw(){
+        System.out.println("Drawing Rectangle");
+    }
+    
+    @Override
+    void rotate(int x){
+        System.out.println("Rotated by:"+x);
+    }
+    
+    @Override
+    void move(int x,int y){
+        centre_x+=x;
+        centre_y+=y;
+    }
+    
+    void get_details(){
+        area;
+        System.out.println("Centre:"+centre_x+","+centre_y);
+        System.out.println("Rotate Angle:"+gyro);
+    }
+}

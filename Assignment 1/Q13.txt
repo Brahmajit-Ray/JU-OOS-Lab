@@ -1,0 +1,77 @@
+abstract class Automobile{
+    String make;
+    String type;
+    int maxSpeed;
+    int price;
+    double mileage;
+    String registration_number;
+    
+    Automobile(String m,String t,int speed,int p,double mil,String reg){
+        make=m;
+        type=t;
+        maxSpeed=speed;
+        price=p;
+        mileage=mil;
+        registration_number=reg;
+    }
+    
+    void show_details(){
+        System.out.println("Make:"+make);
+        System.out.println("Type:"+type);
+        System.out.println("MaxSpeed:"+maxSpeed);
+        System.out.println("Price:"+price);
+        System.out.println("Mileage:"+mileage);
+        System.out.println("Registration:"+registration_number);
+    }
+}
+
+class Truck extends Automobile{
+    int capacity;
+    String hoodType;
+    int noOfWheels;
+    
+    Truck(String m,String t,int speed,int p,double mil,String reg,int cap,String hood,int wheels){
+        super(m,t,speed,p,mil,reg);
+        capacity=cap;
+        hoodType=hood;
+        noOfWheels=wheels;
+    }
+    
+    void show_details(){
+        super.show_details();
+        System.out.println("Capacity:"+capacity);
+        System.out.println("Hood Type:"+hoodType);
+        System.out.println("No of Wheels:"+noOfWheels);
+        System.out.println("***********************************");
+    }
+    
+}
+
+
+class Car extends Automobile{
+    int noOfDoors;
+    int SeatingCapacity;
+    
+    Car(String m,String t,int speed,int p,double mil,String reg,int doors,int cap){
+        super(m,t,speed,p,mil,reg);
+        noOfDoors=doors;
+        SeatingCapacity=cap;
+    }
+    
+    void show_details(){
+        super.show_details();
+        System.out.println("Capacity:"+SeatingCapacity);
+        System.out.println("Doors:"+noOfDoors);
+        System.out.println("***********************************");
+    }
+    
+}
+
+class Main{
+    public static void main(String[] args){
+        Truck Tata=new Truck("Tata","Pickup",70,100000,21.73,"WB007",40,"Canvas",8);
+        Car Maruti=new Car("Maruti","SUV",120,120000,25,"WB100",4,5);
+        Tata.show_details();
+        Maruti.show_details();
+    }
+}

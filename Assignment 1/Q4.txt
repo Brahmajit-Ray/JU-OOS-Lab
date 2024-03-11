@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+class BankAccount{
+
+int AccNumber;
+double balance;
+String OwnerName;
+
+BankAccount()
+{
+
+}
+BankAccount(int a,double b,String c){
+        this.AccNumber=a;
+        this.balance=b;
+        this.OwnerName=c;
+}
+
+double balance(){
+        return this.balance;
+}
+
+void add(double amt){
+        this.balance+=amt;
+}
+
+void withdraw(double amt){
+        if(amt>this.balance){
+                System.out.println("Bounce");
+        }else{
+                this.balance-=amt;
+        }
+}
+
+void print(){
+        System.out.println("Account Number:"+AccNumber);
+        System.out.println("Owner Name:"+OwnerName);
+        System.out.println("Balance:"+balance);
+        System.out.println("");
+        }
+
+
+}
+
+
+class AccountManager extends BankAccount{
+        BankAccount[] arr;
+        int ptr=0;
+
+        AccountManager(int n){
+                arr=new BankAccount[n];
+                for(int i=0;i<n;i++)
+                arr[i]=new BankAccount();
+        }
+
+        void AddAccount(int a,double b,String c){
+                arr[ptr]=new  BankAccount(a,b,c);
+                ptr+=1;
+        }
+
+        void DeleteAccount(int a){
+                int tgt=0;
+                for(int i=0;i<ptr;i++){
+                        if(arr[i].AccNumber==a){
+                                tgt=i;
+                        }
+                }
+
+                for(int i=tgt;i<ptr;i++){
+                        arr[i]=arr[i+1];
+                }
+                ptr-=1;
+        }
+
+        void Deposit(int a,double b){
+                for(int i=0;i<ptr;i++){
+                        if(arr[i].AccNumber==a){
+                                arr[i].add(b);
+                        }
+                }
+        }
+
+
+        void Withdraw(int a,double b){
+                for(int i=0;i<ptr;i++){
+                        if(arr[i].AccNumber==a){
+                                arr[i].withdraw(b);
+                        }
+                }
+        }
+
+}
+
+
+
+class Bank{
+        public static void main(String args[]){
+                AccountManager SBI=new AccountManager(5);
+                SBI.AddAccount(10000,2500,"Virat Kohli");
+                SBI.AddAccount(10001,3000,"Rohit Sharma");
+                SBI.AddAccount(10002,2700,"KL Rahul");
+                SBI.AddAccount(10003,2800,"Sachin Tendulkar");
+                SBI.AddAccount(10004,2300,"Shreyas iyer");
+
+                for(int i=0;i<5;i++){
+                        SBI.arr[i].print();
+                }
+        }
+}

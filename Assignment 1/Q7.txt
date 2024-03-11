@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+abstract class Publication{
+        protected int no_of_pages;
+        protected int price;
+        protected String publisher_name;
+        protected String name;
+
+        void set_pages(int n){
+                this.no_of_pages=n;
+        }
+
+        void set_price(int n){
+                this.price=n;
+        }
+
+        void set_publisher(String s){
+                this.publisher_name=s;
+        }
+
+        void set_name(String s){
+                this.name=s;
+        }
+        int get_pages(){
+                return no_of_pages;
+        }
+
+        int get_price(){
+                return price;
+        }
+
+        String get_publisher(){
+                return publisher_name;
+        }
+
+        String get_name(){
+                return name;
+        }
+
+}
+
+class Journal extends Publication{
+
+         Journal(int pages,int price,String name,String n){
+                set_pages(pages);
+                set_price(price);
+                set_publisher(name);
+                set_name(n);
+        }
+
+
+}
+
+class Book extends Publication{
+
+         Book(int pages,int price,String name,String n){
+                set_pages(pages);
+                set_price(price);
+                set_publisher(name);
+                set_name(n);
+
+        }
+
+}
+
+class Library{
+        Publication[] arr;
+        int ptr=0;
+
+        Library(int n){
+                arr=new Publication[n];
+        }
+
+        void add(Publication p1){
+                arr[ptr]=p1;
+                ptr+=1;
+        }
+
+        void display(){
+                for(int i=0;i<ptr;i++){
+                        System.out.println("Name:"+arr[i].get_name());
+                        System.out.println("Publisher:"+arr[i].get_publisher());
+                        System.out.println("No of pages:"+arr[i].get_pages());
+                        System.out.println("Price:"+arr[i].get_price());
+                        System.out.println("*********************************");
+                }
+        }
+
+}
+
+
+class Solution{
+        public static void main(String[] args){
+                Journal j1=new Journal(500,100,"WS","Marine Life");
+                Journal j2=new Journal(600,200,"DK","Life in Kolkata");
+                Journal j3=new Journal(500,250,"HK","Wildlife");
+                Book b1=new Book(450,250,"Herge","TinTin");
+                Book b2=new Book(450,300,"ACD","Sherlock");
+
+                Library L1=new Library(10);
+                L1.add(j1);
+                L1.add(j2);
+                L1.add(j3);
+                L1.add(b1);
+                L1.add(b2);
+
+                L1.display();
+        }
+}

@@ -1,0 +1,103 @@
+import java.util.Scanner;
+
+class Account{
+        protected int Account_number;
+        protected String holder_name;
+        protected double balance;
+
+        Account(int acc,String s,double bal){
+                Account_number=acc;
+                holder_name=s;
+                balance=bal;
+        }
+
+
+        void update_holder_name(String s){
+                holder_name=s;
+        }
+
+        void update_balance(double n){
+                balance+=n;
+        }
+
+        double get_balance(){
+                return balance;
+        }
+
+        String get_holder(){
+                return holder_name;
+        }
+
+        int get_acc(){
+                return Account_number;
+        }
+
+
+
+}
+
+class SavingsAccount extends Account{
+        double interest=0.04;
+
+        double calculateYearlyInterest(){
+                return interest*this.get_balance();
+        }
+
+        SavingsAccount(int acc,String s,double bal){
+                super(acc,s,bal);
+        }
+}
+
+class CurrentAccount extends Account{
+        CurrentAccount(int acc,String s,double bal){
+               super(acc,s,bal);
+        }
+
+}
+
+
+class Manager{
+        Account[] arr;
+        int ptr=0;
+
+        Manager(int n){
+                arr=new Account[n];
+        }
+
+        void add(Account a1){
+                arr[ptr]=a1;
+                ptr+=1;
+        }
+
+        void display(){
+                for(int i=0;i<ptr;i++){
+                        System.out.println("Holder:"+arr[i].get_holder());
+                        System.out.println("Acc No:"+arr[i].get_acc());
+                        System.out.println("Balance:"+arr[i].get_balance());
+                        if(arr[i] instanceof SavingsAccount){
+                                System.out.println("Interest:"+((SavingsAccount)arr[i]).calculateYearlyInterest());
+                        }
+                        System.out.println("**************************");
+                }
+        }
+
+}
+
+class Solution{
+        public static void main(String[] args){
+                Manager SBI=new Manager(10);
+                SavingsAccount s1=new SavingsAccount(10000,"Virat Kohli",25000);
+                SavingsAccount s2=new SavingsAccount(10001,"Rohit Sharma",25000);
+                SavingsAccount s3=new SavingsAccount(10002,"Hrithik Roshan",25000);
+                CurrentAccount c1=new CurrentAccount(10003,"Shah Rukh Khan",25000);
+                CurrentAccount c2=new CurrentAccount(10004,"Sunil Chhetri",25000);
+
+                SBI.add(s1);
+                SBI.add(s2);
+                SBI.add(s3);
+                SBI.add(c1);
+                SBI.add(c2);
+
+                SBI.display();
+        }
+}

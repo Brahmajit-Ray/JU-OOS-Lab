@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+class Student{
+String name;
+double OOP,DBMS,COA;
+
+void set_marks(double a,double b,double c){
+        this.OOP=a;
+        this.DBMS=b;
+        this.COA=c;
+}
+
+double average(){
+        return (OOP+DBMS+COA)/3.0 ;
+}
+
+void display(){
+        System.out.println("Name:"+name);
+        System.out.println("OOP:"+OOP);
+        System.out.println("DBMS:"+DBMS);
+        System.out.println("COA:"+COA);
+        System.out.println("Average:"+average());
+
+}
+
+Student(String s,double a,double b,double c){
+        this.name=s;
+        set_marks(a,b,c);
+
+}
+
+}
+
+class Solution{
+        public static void main(String args[]){
+                Student s1=new Student("Vishy Anand",90,92,95);
+                s1.display();
+}
+}

@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+class Room{
+int height;
+int width;
+int breadth;
+
+int volume(){
+return height*width*breadth;
+}
+
+Room(int h,int w,int b){
+System.out.println("Constructor called");
+this.height=h;
+this.width=w;
+this.breadth=b;
+}
+
+}
+
+
+class RoomDemo{
+
+public static void main(String args[]){
+        Room r1=new Room(10,20,30);
+        Room r2=new Room(20,35,60);
+        System.out.println("Volume of r1="+r1.volume());
+        System.out.println("Volume of r2="+r2.volume());
+}
+}

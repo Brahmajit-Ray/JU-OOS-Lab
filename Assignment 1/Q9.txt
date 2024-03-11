@@ -1,0 +1,224 @@
+class Person{
+        String name;
+        int age;
+        double weight;
+        double height;
+        String DateOfBirth;
+        String Address;
+
+        Person(){
+        }
+
+        Person(String n,int a,double w,double h,String dob,String addr){
+                name=n;
+                age=a;
+                weight=w;
+                height=h;
+                DateOfBirth=dob;
+                Address=addr;
+        }
+
+        void modify_address(String s){
+                Address=s;
+        }
+
+        void modify_age(int a){
+                age=a;
+        }
+
+        void modify_weight(double w){
+                weight=w;
+        }
+
+        void display(){
+                System.out.println("Name:"+name);
+                System.out.println("Age:"+age);
+                System.out.println("Weight:"+weight+"Kg");
+                System.out.println("Height:"+height+"m");
+                System.out.println("Date of Birth:"+DateOfBirth);
+                System.out.println("Address:"+Address);
+        }
+}
+
+
+class Employee extends Person{
+        int salary;
+        String DateOfJoining;
+        double experience;
+
+        Employee(String n,int a,double w,double h,String dob,String addr,int sal,String doj,double exp){
+                super(n,a,w,h,dob,addr);
+                salary=sal;
+                DateOfJoining=doj;
+                experience=exp;
+
+        }
+
+
+        void modify_sal(int s){
+                salary=s;
+        }
+
+        void display(){
+                super.display();
+                System.out.println("Salary:"+salary);
+                System.out.println("Date of Joining:"+DateOfJoining);
+                System.out.println("Experience:"+experience+"yrs");
+        }
+
+
+
+
+}
+
+
+class Student extends Person{
+        int roll;
+        String[] listOfSubjects=new String[10];
+        int[] marks;
+
+        String calculate_grade(){
+                double grade=0;
+                for(int i=0;i<listOfSubjects.length;i++){
+                        grade+=marks[i];
+                }
+
+                if(grade<40){
+                        return "F";
+                }
+                else if(grade>40 && grade<60){
+                        return "D";
+                }
+
+                else{
+                        return "A";
+                }
+        }
+
+        void display(){
+                super.display();
+                System.out.println("Grade:"+calculate_grade());
+        }
+
+}
+
+class Technician extends Employee{
+        Technician(String n,int a,double w,double h,String dob,String addr,int sal,String doj,double exp){
+                super(n,a,w,h,dob,addr,sal,doj,exp);
+        }
+
+        void display(){
+                super.display();
+        }
+}
+
+
+
+class Professor extends Employee{
+        String[] courses=new String[10];
+        String[] listOfAdvisee=new String[10];
+
+        int course_ptr=0;
+        int advisee_ptr=0;
+        int course_tgt=0;
+        int advisee_tgt=0;
+
+        void add_course(String s){
+                courses[course_ptr]=s;
+                course_ptr+=1;
+        }
+
+        void add_advisee(String s){
+                listOfAdvisee[advisee_ptr]=s;
+                advisee_ptr+=1;
+        }
+        void remove_course(String c){
+                int flag=0;
+                for(int i=0;i<course_ptr;i++){
+                        if(courses[i]==c){
+                                course_tgt=i;
+                                flag=1;
+                        }
+                }
+
+                if(flag==1){
+                        for(int i=course_tgt;i<course_ptr;i++){
+                                courses[i]=courses[i+1];
+                        }
+
+                        course_ptr-=1;
+                }
+
+                if(flag==1){
+                        System.out.println("Course Removed");
+                }else{
+                        System.out.println("Course not present");
+                }
+        }
+        void remove_advisee(String c){
+                int flag2=0;
+                for(int i=0;i<advisee_ptr;i++){
+                        if(listOfAdvisee[i]==c){
+                                advisee_tgt=i;
+                                flag2+=1;
+                        }
+                }
+
+                if(flag2==1){
+                        for(int i=advisee_tgt;i<advisee_ptr;i++){
+                                listOfAdvisee[i]=listOfAdvisee[i+1];
+                        }
+
+                        advisee_ptr-=1;
+                }
+                if(flag2==1){
+                        System.out.println("Advisee Removed");
+                }else{
+                        System.out.println("Advisee not present");
+                }
+        }
+
+
+        void display(){
+                super.display();
+                System.out.println("Courses\n------");
+
+                for(int i=0;i<course_ptr;i++){
+                        System.out.println(courses[i]);
+                }
+
+                System.out.println("-------");
+                System.out.println("");
+
+                System.out.println("Advisee\n-----");
+
+                for(int i=0;i<advisee_ptr;i++){
+                        System.out.println(listOfAdvisee[i]);
+                }
+        }
+
+
+        Professor(String n,int a,double w,double h,String dob,String addr,int sal,String doj,double exp){
+                super(n,a,w,h,dob,addr,sal,doj,exp);
+        }
+
+
+}
+
+
+class Solution{
+        public static void main(String[] args){
+                Professor p1=new Professor("ARR",36,60.5,1.81,"12 June 1987","50 RG Road",30000,"30 January 2018",5);
+                p1.add_advisee("A Singh");
+                p1.add_course("Music");
+                p1.add_course("Vocals");
+                p1.add_advisee("H Sharma");
+                p1.display();
+                System.out.println("********************");
+
+                p1.remove_advisee("A Singh");
+                p1.display();
+
+        }
+
+}

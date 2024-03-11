@@ -1,0 +1,37 @@
+class TollBooth{
+    int paid;
+    int not_paid;
+    int money;
+    
+    TollBooth(){
+        paid=0;
+        not_paid=0;
+        money=0;
+    }
+    
+    void car_pass(boolean b){
+        if(b){
+            paid+=1;
+            money+=50;
+        }else{
+            not_paid+=1;
+        }
+    }
+    
+    void display_details(){
+        System.out.println("Total cars paid:"+paid);
+        System.out.println("Total cars not paid:"+not_paid);
+        System.out.println("Total Money:"+money);
+    }
+    
+}
+
+class Main{
+    public static void main(String[] args){
+        TollBooth Plaza=new TollBooth();
+        Plaza.car_pass(true);
+        Plaza.car_pass(false);
+        Plaza.car_pass(true);
+        Plaza.display_details();
+    }
+}

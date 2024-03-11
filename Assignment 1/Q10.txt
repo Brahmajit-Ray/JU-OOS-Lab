@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+class Book{
+        String title;
+        String author;
+        String publisher;
+        int cost;
+        int stock;
+
+        Book(){
+        }
+
+        Book(String t,String a,String p,int c,int st){
+                title=t;
+                author=a;
+                publisher=p;
+                cost=c;
+                stock=st;
+        }
+
+        void display(){
+                System.out.println("Title:"+title) ;
+                System.out.println("Author:"+author) ;
+                System.out.println("Publisher:"+publisher) ;
+                System.out.println("Price:"+cost) ;
+                System.out.println("Stock:"+stock) ;
+                System.out.println("------------") ;
+        }
+}
+
+
+class Book_Store extends Book{
+        Book[] arr=new Book[25];
+
+        int book_ptr=0;
+
+        void add_book(String t,String a,String p,int c,int st){
+                arr[book_ptr]=new Book(t,a,p,c,st) ;
+                book_ptr+=1;
+        }
+
+        void sell(String t,String a,int amt){
+                for(int i=0;i<book_ptr;i++){
+                        if(arr[i].title==t && arr[i].author==a){
+                                if(amt<=arr[i].stock){
+                                        System.out.println("Book Purchased:"+arr[i].title) ;
+                                        System.out.println("Amount:"+amt) ;
+                                        System.out.println("Cost:"+amt*arr[i].cost) ;
+                                }else{
+                                        System.out.println("Required copies not in stock") ;
+                                }
+                        }
+                }
+
+        }
+
+
+        void display_details(String s){
+                int flag=0;
+                for(int i=0;i<book_ptr;i++){
+                        if(arr[i].title==s){
+                                arr[i].display() ;
+                                flag=1;
+                        }
+
+                }
+
+
+                if(flag==0){
+                        System.out.println("Book not in store") ;
+                }
+
+        }
+
+        void update_stock(String t,int c){
+                for(int i=0;i<book_ptr;i++){
+                        if(arr[i].title==t){
+                                arr[i].stock+=c;
+                        }
+                }
+        }
+
+        Book_Store(){
+        }
+}
+
+class Solution{
+        public static void main(String[] args){
+                Book_Store StarMark=new Book_Store() ;
+                StarMark.add_book("2 States","Chetan Bhagat","Rupa",130,10) ;
+                StarMark.add_book("Alice in Wonderland","Lewis Carroll","Harper Collins",120,8) ;
+		StarMark.display_details("Alice in Wonderland");
+
+
+                StarMark.sell("2 States","Chetan Bhagat",11) ;
+        }
+}
