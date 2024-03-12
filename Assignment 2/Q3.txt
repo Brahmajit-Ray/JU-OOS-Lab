@@ -1,0 +1,59 @@
+class CalculateFactorial implements Runnable{
+    private final int limit;
+    double[] denominators;
+    
+    CalculateFactorial(double[] a,int l){
+        this.limit=l;
+        this.denominators=a;
+    }
+    
+    public void run(){
+        denominators[0]=1;
+        
+        for(int i=1;i<=limit;i++){
+            denominators[i]=i*denominators[i-1];
+        }
+    }
+}
+
+class CalculateSum implements Runnable{
+    double result=0.0;
+    double[] denominators;
+    
+    CalculateSum(double[] a){
+        this.denominators=a;
+    }
+    
+    public void run(){
+        for(int i=0;i<denominators.length;i++){
+            result+=1/denominators[i];
+        }
+        System.out.println(result);
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        double[] denominators=new double[11];
+        CalculateFactorial t1=new CalculateFactorial(denominators,10);
+        CalculateSum t2=new CalculateSum(denominators);
+        
+        Thread t3=new Thread(t1);
+        Thread t4=new Thread(t2);
+        
+        t3.start();
+        try{
+            t3.join();
+        }catch(InterruptedException ie){
+            
+        }
+        
+        t4.start();
+        try{
+            t4.join();
+        }catch(InterruptedException ie){
+    
+        }
+        
+    }
+}

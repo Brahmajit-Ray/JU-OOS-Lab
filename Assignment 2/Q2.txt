@@ -1,0 +1,77 @@
+class Printer{
+    private int check=1;
+    private final int limit;
+
+    Printer(int l){
+        this.limit=l;
+    }    
+    
+    synchronized void even(){
+        while(check<=limit){
+            if(check%2==0){
+                System.out.println(check);
+                check++;
+                notify();
+            }
+            else{
+                try{
+                    wait();
+                }
+                catch(Exception ie){
+                }
+            }
+        }
+    }
+    
+    synchronized void odd(){
+        while(check<=limit){
+            if(check%2!=0){
+                System.out.println(check);
+                check++;
+                notify();
+            }
+            else{
+                try{
+                    wait();
+                }
+                catch(Exception ie){
+                }
+            }
+        }
+    }
+}
+
+class EvenThread implements Runnable{
+    Printer p;
+    
+    EvenThread(Printer p){
+        this.p=p;
+        new Thread(this).start();
+    }
+    
+    public void run(){
+        p.even();
+    }
+}
+
+class OddThread implements Runnable{
+    Printer p;
+    
+    OddThread(Printer p){
+        this.p=p;
+        new Thread(this).start();
+    }
+    
+    public void run(){
+        p.odd();
+    }
+}
+
+class Main{
+    public static void main(String args[]){
+        Printer p=new Printer(8);
+        new EvenThread(p);
+        new OddThread(p);
+        
+    }   
+}

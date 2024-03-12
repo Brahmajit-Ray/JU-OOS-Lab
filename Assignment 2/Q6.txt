@@ -1,0 +1,71 @@
+class BinarySearchThread extends Thread {
+    private int[] array;
+    private int element;
+    private int result = -1;
+
+    public BinarySearchThread(int[] array, int element) {
+        this.array = array;
+        this.element = element;
+    }
+
+    public void run() {
+        int low = 0;
+        int high = array.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (array[mid] == element) {
+                result = mid;
+                break;
+            } else if (array[mid] < element) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+
+    public int getResult() {
+        return result;
+    }
+}
+
+ class Main {
+    public static void main(String[] args) {
+        int n = 100; 
+        int[] array = new int[n];
+        int element = 42;
+
+        for (int i = 0; i < n; i++) {
+            array[i] = i + 1;
+        }
+
+
+        BinarySearchThread[] threads = new BinarySearchThread[n / 10];
+        for (int i = 0; i < n / 10; i++) {
+            int[] subArray = new int[10];
+            System.arraycopy(array, i * 10, subArray, 0, 10); 
+            threads[i] = new BinarySearchThread(subArray, element);
+            threads[i].start();
+        }
+
+        for (int i = 0; i < n / 10; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (int i = 0; i < n / 10; i++) {
+            int result = threads[i].getResult();
+            if (result != -1) {
+                System.out.println("Element found at index: " + (i * 10 + result));
+                return;
+            }
+        }
+
+        System.out.println("Element not found.");
+    }
+}

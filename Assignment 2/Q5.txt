@@ -1,0 +1,41 @@
+class SeriesAdd extends Thread{
+    int start;
+    int end;
+    int sum;
+    
+    SeriesAdd(int start,int end){
+        this.start=start;
+        this.end=end;
+    }
+    
+    public void run(){
+        for(int i=start;i<=end;i=i+2){
+            sum+=i;
+        }
+    }
+    
+    public int getsum(){
+        return sum;
+    }
+    
+}
+
+class Main{
+    public static void main(String args[]){
+        SeriesAdd t1=new SeriesAdd(1,99);
+        SeriesAdd t2=new SeriesAdd(2,100);
+        
+        
+        t1.start();
+        t2.start();
+        
+        try{
+            t1.join();
+            t2.join();
+        }catch(InterruptedException ie){
+            
+        }
+        
+        System.out.println(t1.getsum()+t2.getsum());
+    }
+}
